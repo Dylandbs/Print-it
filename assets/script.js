@@ -19,10 +19,37 @@ const slides = [
   },
 ];
 
+const bannerImg = document.querySelector(".banner-img");
+const bannerText = document.querySelector("#banner p");
+
+let selectedSlide = 0;
+
+const modifyBanner = () => {
+  const slide = slides[selectedSlide];
+  bannerImg.src = `./assets/images/slideshow/${slide.image}`;
+  bannerText.innerHTML = slide.tagLine;
+};
+
 const right = document
   .querySelector(".arrow_right > img")
-  .addEventListener("click", () => {});
+  .addEventListener("click", () => {
+    if (selectedSlide < slides.length - 1) {
+      selectedSlide++;
+    } else {
+      selectedSlide = 0;
+    }
+    modifyBanner();
+  });
 
 const left = document
   .querySelector(".arrow_left > img")
-  .addEventListener("click", () => {});
+  .addEventListener("click", () => {
+    if (selectedSlide > 0) {
+      selectedSlide--;
+    } else {
+      selectedSlide = slides.length - 1;
+    }
+    modifyBanner();
+  });
+
+modifyBanner();
