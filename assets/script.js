@@ -29,12 +29,24 @@ const modifyBanner = () => {
   const slide = slides[selectedSlide];
   bannerImg.src = `./assets/images/slideshow/${slide.image}`;
   bannerText.innerHTML = slide.tagLine;
+
+  const allDots = document.querySelectorAll(".dot");
+    allDots.forEach((dot, index) => {
+      if (index === selectedSlide) {
+        dot.classList.add("dot_selected");
+      } else {
+        dot.classList.remove("dot_selected");
+      }
+    });
 };
 
 const dots = () => {
   slides.forEach((a, index) => {
     const dotContainer = document.createElement("div");
     dotContainer.classList.add("dot");
+    if (index === selectedSlide) {
+      dotContainer.classList.add("dot_selected");
+    }
     dotsList.appendChild(dotContainer);
   });
 };
