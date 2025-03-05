@@ -21,6 +21,7 @@ const slides = [
 
 const bannerImg = document.querySelector(".banner-img");
 const bannerText = document.querySelector("#banner p");
+const dotsList = document.querySelector(".dots");
 
 let selectedSlide = 0;
 
@@ -28,6 +29,14 @@ const modifyBanner = () => {
   const slide = slides[selectedSlide];
   bannerImg.src = `./assets/images/slideshow/${slide.image}`;
   bannerText.innerHTML = slide.tagLine;
+};
+
+const dots = () => {
+  slides.forEach((a, index) => {
+    const dotContainer = document.createElement("div");
+    dotContainer.classList.add("dot");
+    dotsList.appendChild(dotContainer);
+  });
 };
 
 const right = document
@@ -52,4 +61,5 @@ const left = document
     modifyBanner();
   });
 
+dots();
 modifyBanner();
