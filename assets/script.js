@@ -25,6 +25,8 @@ const dotsList = document.querySelector(".dots");
 
 let selectedSlide = 0;
 
+
+
 const modifyBanner = () => {
   const slide = slides[selectedSlide];
   bannerImg.src = `./assets/images/slideshow/${slide.image}`;
@@ -62,6 +64,7 @@ const right = document
     modifyBanner();
   });
 
+  
 const left = document
   .querySelector(".arrow_left > img")
   .addEventListener("click", () => {
