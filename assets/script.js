@@ -19,27 +19,35 @@ const slides = [
   },
 ];
 
+const arrowLeft = document.querySelector(".arrow_left > img");
+const arrowRight = document.querySelector(".arrow_right > img");
 const bannerImg = document.querySelector(".banner-img");
 const bannerText = document.querySelector("#banner p");
 const dotsList = document.querySelector(".dots");
 
 let selectedSlide = 0;
 
-
+if (!bannerImg || !bannerText || !dotsList) {
+  throw new Error(
+    "Erreur : Au moins un des éléments suivants est manquant : bannerImg, bannerText, dotsList."
+  );
+}
 
 const modifyBanner = () => {
   const slide = slides[selectedSlide];
-  bannerImg.src = `./assets/images/slideshow/${slide.image}`;
+  if (bannerImg instanceof HTMLImageElement) {
+    bannerImg.src = `./assets/images/slideshow/${slide.image}`;
+  }
   bannerText.innerHTML = slide.tagLine;
 
   const allDots = document.querySelectorAll(".dot");
-    allDots.forEach((dot, index) => {
-      if (index === selectedSlide) {
-        dot.classList.add("dot_selected");
-      } else {
-        dot.classList.remove("dot_selected");
-      }
-    });
+  allDots.forEach((dot, index) => {
+    if (index === selectedSlide) {
+      dot.classList.add("dot_selected");
+    } else {
+      dot.classList.remove("dot_selected");
+    }
+  });
 };
 
 const dots = () => {
@@ -53,9 +61,13 @@ const dots = () => {
   });
 };
 
-const right = document
-  .querySelector(".arrow_right > img")
-  .addEventListener("click", () => {
+const arrowBtn = () => {
+
+  if (!arrowLeft || !arrowRight) {
+    throw new Error("Erreur: il manque une arrow");
+  }
+
+  arrowRight.addEventListener("click", () => {
     if (selectedSlide < slides.length - 1) {
       selectedSlide++;
     } else {
@@ -63,11 +75,8 @@ const right = document
     }
     modifyBanner();
   });
-
   
-const left = document
-  .querySelector(".arrow_left > img")
-  .addEventListener("click", () => {
+  arrowLeft.addEventListener("click", () => {
     if (selectedSlide > 0) {
       selectedSlide--;
     } else {
@@ -75,6 +84,8 @@ const left = document
     }
     modifyBanner();
   });
+}
 
+arrowBtn()
 dots();
 modifyBanner();
